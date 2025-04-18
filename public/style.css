@@ -1,0 +1,62 @@
+/* public/style.css - Complete with Status Icons */
+
+/* Reset basic styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #222; color: #fff; overflow: hidden; }
+.call-container { display: flex; flex-direction: column; height: 100vh; background-color: #1a1a1a; }
+#video-grid { flex-grow: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px; padding: 8px; overflow: auto; align-content: center; justify-content: center; }
+.video-participant { position: relative; background-color: #000; border-radius: 8px; overflow: hidden; min-height: 150px; display: flex; align-items: center; justify-content: center; border: 1px solid #333; }
+.video-participant.local video { transform: scaleX(-1); -webkit-transform: scaleX(-1); }
+.video-participant video { width: 100%; height: 100%; object-fit: cover; display: block; transition: visibility 0.1s linear; }
+.name-tag { position: absolute; bottom: 5px; left: 5px; background-color: rgba(0, 0, 0, 0.6); color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; z-index: 10; }
+
+/* --- Remote Status Icon Styles --- */
+.video-participant .status-icon {
+    position: absolute;
+    top: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+}
+.video-participant .status-icon svg { width: 18px; height: 18px; fill: currentColor; }
+.video-participant .status-icon.audio-muted { right: 10px; }
+.video-participant .status-icon.video-stopped { right: 50px; }
+/* --- End Status Icon Styles --- */
+
+#controls-bar { height: 65px; background-color: #2c2c2e; display: flex; align-items: center; justify-content: center; padding: 0 20px; flex-shrink: 0; gap: 15px; border-top: 1px solid #444; z-index: 100; }
+#controls-bar button { background-color: #444; border: none; color: #fff; padding: 8px; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease; }
+#controls-bar button svg { width: 24px; height: 24px; fill: currentColor; }
+#controls-bar button:hover:not(:disabled) { background-color: #555; }
+#hangUpButton { background-color: #e74c3c; }
+#hangUpButton:hover:not(:disabled) { background-color: #c0392b; }
+#controls-bar button.media-off { background-color: #5e5e61; }
+#controls-bar button.media-off:hover:not(:disabled) { background-color: #77777a; }
+#startCallButton { background-color: #27ae60; color: white; }
+#startCallButton:hover:not(:disabled) { background-color: #229954; }
+#shareScreenButton { /* Default */ }
+#shareScreenButton.sharing { background-color: #1abc9c; }
+#shareScreenButton.sharing:hover:not(:disabled) { background-color: #16a085; }
+#controls-bar button:disabled { background-color: #3a3a3a; opacity: 0.5; cursor: not-allowed; }
+#status-container { display: none; }
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    html, body { overflow: initial; }
+    .call-container { height: 100vh; }
+    #video-grid { display: flex; flex-direction: column; grid-template-columns: none; align-content: initial; justify-content: initial; padding: 5px; gap: 5px; overflow-y: auto; }
+    .video-participant { width: 100%; min-height: 180px; border-radius: 6px; }
+    .video-participant .status-icon { width: 26px; height: 26px; top: 5px; }
+    .video-participant .status-icon svg { width: 15px; height: 15px; }
+    .video-participant .status-icon.audio-muted { right: 5px; }
+    .video-participant .status-icon.video-stopped { right: 40px; }
+    #controls-bar { height: 60px; padding: 0 10px; gap: 10px; flex-wrap: wrap; justify-content: space-around; }
+    #controls-bar button { width: 40px; height: 40px; padding: 6px; }
+    #controls-bar button svg { width: 20px; height: 20px; }
+    .name-tag { font-size: 0.75em; padding: 2px 6px; }
+}
